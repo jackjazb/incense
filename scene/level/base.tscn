@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwj4kjexchejh"]
+
+[ext_resource type="PackedScene" uid="uid://djitow53671t3" path="res://asset/mesh/base.glb" id="1_7uoj2"]
+[ext_resource type="Material" uid="uid://cb7lme8v0qtwp" path="res://asset/material/ground1.tres" id="2_2ho58"]
+[ext_resource type="Script" path="res://scene/level/base.gd" id="2_a2gr2"]
+[ext_resource type="Texture2D" uid="uid://luon88f4uvsi" path="res://asset/texture/grid.png" id="2_mt0hv"]
+[ext_resource type="Script" path="res://scene/level/money_printer.gd" id="4_bpikq"]
+[ext_resource type="PackedScene" uid="uid://hraddva7x0r1" path="res://scene/money.tscn" id="5_egaep"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deqda"]
+albedo_color = Color(0.525101, 0.525101, 0.525101, 1)
+albedo_texture = ExtResource("2_mt0hv")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_o033m"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_h0r06"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Base" groups=["base"] instance=ExtResource("1_7uoj2")]
+script = ExtResource("2_a2gr2")
+metadata/team = 0
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_deqda")
+surface_material_override/1 = ExtResource("2_2ho58")
+
+[node name="MoneyPrinter" type="Node3D" parent="." index="1"]
+script = ExtResource("4_bpikq")
+money = ExtResource("5_egaep")
+interval = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MoneyPrinter" index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, 5)
+mesh = SubResource("BoxMesh_o033m")
+skeleton = NodePath("../..")
+
+[node name="PrinterLabel" type="Label3D" parent="MoneyPrinter/MeshInstance3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.760972, 0)
+text = "money printer"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MoneyPrinter/MeshInstance3D" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MoneyPrinter/MeshInstance3D/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_h0r06")
+
+[node name="TeamLabel" type="Label3D" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, 8.5)
+text = "base label"

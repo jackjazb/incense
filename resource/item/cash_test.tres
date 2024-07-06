@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://dn5qlcwvk3i1h"]
+
+[ext_resource type="PackedScene" uid="uid://dnu2pmr7xf4mn" path="res://asset/mesh/money.glb" id="1_i4or1"]
+[ext_resource type="Script" path="res://item.gd" id="2_3cdp6"]
+
+[resource]
+script = ExtResource("2_3cdp6")
+instance = ExtResource("1_i4or1")
+cost = 0
+key = 2
+name = "Cash"

@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3d5u2xo6vln7"]
+
+[ext_resource type="Script" path="res://scene/world.gd" id="1_1str2"]
+[ext_resource type="PackedScene" uid="uid://dwj4kjexchejh" path="res://scene/level/base.tscn" id="2_i4pej"]
+[ext_resource type="PackedScene" uid="uid://bdpnt0tsdlr1j" path="res://scene/level/centre.tscn" id="2_p5kjb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_csaam"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_bscx8"]
+sky_material = SubResource("ProceduralSkyMaterial_csaam")
+
+[sub_resource type="Environment" id="Environment_6d7tx"]
+background_mode = 2
+sky = SubResource("Sky_bscx8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_sx6b4"]
+size = Vector3(5, 0.5, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2hhuc"]
+data = PackedVector3Array(-2.5, 0.25, 25, 2.5, 0.25, 25, -2.5, -0.25, 25, 2.5, 0.25, 25, 2.5, -0.25, 25, -2.5, -0.25, 25, 2.5, 0.25, -25, -2.5, 0.25, -25, 2.5, -0.25, -25, -2.5, 0.25, -25, -2.5, -0.25, -25, 2.5, -0.25, -25, 2.5, 0.25, 25, 2.5, 0.25, -25, 2.5, -0.25, 25, 2.5, 0.25, -25, 2.5, -0.25, -25, 2.5, -0.25, 25, -2.5, 0.25, -25, -2.5, 0.25, 25, -2.5, -0.25, -25, -2.5, 0.25, 25, -2.5, -0.25, 25, -2.5, -0.25, -25, 2.5, 0.25, 25, -2.5, 0.25, 25, 2.5, 0.25, -25, -2.5, 0.25, 25, -2.5, 0.25, -25, 2.5, 0.25, -25, -2.5, -0.25, 25, 2.5, -0.25, 25, -2.5, -0.25, -25, 2.5, -0.25, 25, 2.5, -0.25, -25, -2.5, -0.25, -25)
+
+[node name="World" type="Node3D" node_paths=PackedStringArray("join_button", "host_button", "menu")]
+script = ExtResource("1_1str2")
+join_button = NodePath("UI/Panel/MarginContainer/VBoxContainer/Join")
+host_button = NodePath("UI/Panel/MarginContainer/VBoxContainer/Host")
+menu = NodePath("UI/Panel")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 409.0
+offset_top = 127.0
+offset_right = -409.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="UI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "bed of war."
+horizontal_alignment = 1
+
+[node name="Host" type="Button" parent="UI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="UI/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_6d7tx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="RedBase" parent="." instance=ExtResource("2_i4pej")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -100)
+
+[node name="BlueBase" parent="." instance=ExtResource("2_i4pej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100)
+metadata/team = 1
+
+[node name="Centre" parent="." instance=ExtResource("2_p5kjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0455742, -2.5, -0.0746651)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scene/player/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="TempBridge" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -54.1697)
+mesh = SubResource("BoxMesh_sx6b4")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="TempBridge"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TempBridge/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_2hhuc")

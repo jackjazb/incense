@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://buuvhbfgpu737"]
+
+[ext_resource type="PackedScene" uid="uid://c0d5lo72e280a" path="res://scene/weapon/axe.tscn" id="1_reugf"]
+[ext_resource type="Script" path="res://item.gd" id="2_5wi75"]
+
+[resource]
+script = ExtResource("2_5wi75")
+instance = ExtResource("1_reugf")
+cost = 0
+key = 1
+name = "Sword"
