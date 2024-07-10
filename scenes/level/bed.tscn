@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy0626b783cym"]
+
+[ext_resource type="PackedScene" uid="uid://bk1icddtpivmg" path="res://assets/models/bed.glb" id="1_hx4lu"]
+
+[node name="Bed" type="Node3D" groups=["bed"]]
+
+[node name="Mesh" parent="." instance=ExtResource("1_hx4lu")]
+
+[node name="StaticBody3D" parent="Mesh/Centre" index="0"]
+collision_layer = 8
+
+[editable path="Mesh"]

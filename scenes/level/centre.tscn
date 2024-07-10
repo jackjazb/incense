@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdpnt0tsdlr1j"]
+
+[ext_resource type="PackedScene" uid="uid://wvp0tvgrsngq" path="res://assets/models/centre.glb" id="1_e8qin"]
+[ext_resource type="Texture2D" uid="uid://luon88f4uvsi" path="res://assets/textures/grid.png" id="2_uh4px"]
+[ext_resource type="Material" uid="uid://cb7lme8v0qtwp" path="res://assets/materials/ground.tres" id="3_wg1pc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdorb"]
+albedo_color = Color(0.9485, 0.540496, 1, 1)
+albedo_texture = ExtResource("2_uh4px")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[node name="Centre" instance=ExtResource("1_e8qin")]
+
+[node name="Plane" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_sdorb")
+surface_material_override/1 = ExtResource("3_wg1pc")

@@ -1,0 +1,157 @@
+[gd_scene load_steps=19 format=3 uid="uid://dwj4kjexchejh"]
+
+[ext_resource type="PackedScene" uid="uid://djitow53671t3" path="res://assets/models/base.glb" id="1_7uoj2"]
+[ext_resource type="Material" uid="uid://cb7lme8v0qtwp" path="res://assets/materials/ground.tres" id="2_2ho58"]
+[ext_resource type="Script" path="res://src/level/base.gd" id="2_a2gr2"]
+[ext_resource type="Texture2D" uid="uid://luon88f4uvsi" path="res://assets/textures/grid.png" id="2_mt0hv"]
+[ext_resource type="PackedScene" uid="uid://cy0626b783cym" path="res://scenes/level/bed.tscn" id="3_8arqj"]
+[ext_resource type="PackedScene" uid="uid://nhqapx0ism4l" path="res://scenes/level/money_printer.tscn" id="6_3fvou"]
+[ext_resource type="Texture2D" uid="uid://ey814txdmjhj" path="res://assets/textures/shop.png" id="7_1kuey"]
+[ext_resource type="Script" path="res://src/level/shop.gd" id="7_w2x4u"]
+[ext_resource type="Resource" uid="uid://buuvhbfgpu737" path="res://resources/weapons/axe.tres" id="8_f8ljn"]
+[ext_resource type="Script" path="res://src/components/interactable.gd" id="9_au445"]
+[ext_resource type="Resource" uid="uid://c4hdm2j5enwwa" path="res://resources/weapons/repeater.tres" id="9_hfmb3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deqda"]
+albedo_color = Color(0.525101, 0.525101, 0.525101, 1)
+albedo_texture = ExtResource("2_mt0hv")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gv1wj"]
+albedo_texture = ExtResource("7_1kuey")
+uv1_offset = Vector3(0.5, 0.5, 0)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_e7p2i"]
+size = Vector3(1, 1, 0.1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cibh3"]
+data = PackedVector3Array(-0.5, 0.5, 0.05, 0.5, 0.5, 0.05, -0.5, -0.5, 0.05, 0.5, 0.5, 0.05, 0.5, -0.5, 0.05, -0.5, -0.5, 0.05, 0.5, 0.5, -0.05, -0.5, 0.5, -0.05, 0.5, -0.5, -0.05, -0.5, 0.5, -0.05, -0.5, -0.5, -0.05, 0.5, -0.5, -0.05, 0.5, 0.5, 0.05, 0.5, 0.5, -0.05, 0.5, -0.5, 0.05, 0.5, 0.5, -0.05, 0.5, -0.5, -0.05, 0.5, -0.5, 0.05, -0.5, 0.5, -0.05, -0.5, 0.5, 0.05, -0.5, -0.5, -0.05, -0.5, 0.5, 0.05, -0.5, -0.5, 0.05, -0.5, -0.5, -0.05, 0.5, 0.5, 0.05, -0.5, 0.5, 0.05, 0.5, 0.5, -0.05, -0.5, 0.5, 0.05, -0.5, 0.5, -0.05, 0.5, 0.5, -0.05, -0.5, -0.5, 0.05, 0.5, -0.5, 0.05, -0.5, -0.5, -0.05, 0.5, -0.5, 0.05, 0.5, -0.5, -0.05, -0.5, -0.5, -0.05)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lc6t7"]
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_x5r3p"]
+device = -1
+keycode = 4194306
+
+[sub_resource type="Shortcut" id="Shortcut_ir7g4"]
+events = [SubResource("InputEventKey_x5r3p")]
+
+[node name="Base" node_paths=PackedStringArray("bed") groups=["base"] instance=ExtResource("1_7uoj2")]
+script = ExtResource("2_a2gr2")
+bed = NodePath("Bed")
+
+[node name="Bed" parent="." index="0" instance=ExtResource("3_8arqj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -11)
+
+[node name="Cube" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_deqda")
+surface_material_override/1 = ExtResource("2_2ho58")
+
+[node name="TeamLabel" type="Label3D" parent="." index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, 8.5)
+text = "base label"
+
+[node name="MoneyPrinter" parent="." index="3" instance=ExtResource("6_3fvou")]
+
+[node name="Shop" type="Node3D" parent="." index="4" node_paths=PackedStringArray("interactable", "ui_root", "close_button", "ordnance_container", "boosters_container", "defences_container")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.9, 1.5, 0)
+script = ExtResource("7_w2x4u")
+interactable = NodePath("Interactable")
+ui_root = NodePath("ShopUI")
+close_button = NodePath("ShopUI/MarginContainer/VBoxContainer/CloseButton")
+ordnance_container = NodePath("ShopUI/MarginContainer/VBoxContainer/TabContainer/Ordnance/Ordnance")
+boosters_container = NodePath("ShopUI/MarginContainer/VBoxContainer/TabContainer/Boosters/Boosters")
+defences_container = NodePath("ShopUI/MarginContainer/VBoxContainer/TabContainer/Defences/Defences")
+ordnance = Array[Resource("res://src/resources/buyable_resource.gd")]([ExtResource("8_f8ljn"), ExtResource("9_hfmb3")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Shop" index="0"]
+material_override = SubResource("StandardMaterial3D_gv1wj")
+mesh = SubResource("BoxMesh_e7p2i")
+
+[node name="Label3D" type="Label3D" parent="Shop" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.645776, 0)
+text = "wares"
+
+[node name="Interactable" type="Area3D" parent="Shop" index="2" node_paths=PackedStringArray("object_mesh")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("9_au445")
+object_mesh = NodePath("../MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Interactable" index="0"]
+shape = SubResource("ConcavePolygonShape3D_cibh3")
+
+[node name="ShopUI" type="CanvasLayer" parent="Shop" index="3"]
+layer = 2
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/ShopUI" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ShopUI/MarginContainer" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Shop/ShopUI/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+text = "wares"
+label_settings = SubResource("LabelSettings_lc6t7")
+
+[node name="TabContainer" type="TabContainer" parent="Shop/ShopUI/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Ordnance" type="MarginContainer" parent="Shop/ShopUI/MarginContainer/VBoxContainer/TabContainer" index="1"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Ordnance" type="GridContainer" parent="Shop/ShopUI/MarginContainer/VBoxContainer/TabContainer/Ordnance" index="0"]
+layout_mode = 2
+columns = 4
+
+[node name="Boosters" type="MarginContainer" parent="Shop/ShopUI/MarginContainer/VBoxContainer/TabContainer" index="2"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Boosters" type="GridContainer" parent="Shop/ShopUI/MarginContainer/VBoxContainer/TabContainer/Boosters" index="0"]
+layout_mode = 2
+columns = 4
+
+[node name="Defences" type="MarginContainer" parent="Shop/ShopUI/MarginContainer/VBoxContainer/TabContainer" index="3"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Defences" type="GridContainer" parent="Shop/ShopUI/MarginContainer/VBoxContainer/TabContainer/Defences" index="0"]
+layout_mode = 2
+columns = 4
+
+[node name="CloseButton" type="Button" parent="Shop/ShopUI/MarginContainer/VBoxContainer" index="2"]
+layout_mode = 2
+size_flags_horizontal = 8
+shortcut = SubResource("Shortcut_ir7g4")
+text = "Close"

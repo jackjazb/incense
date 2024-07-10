@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://nhqapx0ism4l"]
+
+[ext_resource type="Script" path="res://src/level/money_printer.gd" id="1_lqhv7"]
+[ext_resource type="PackedScene" uid="uid://hraddva7x0r1" path="res://scenes/level/money.tscn" id="2_xcjfw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o033m"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_h0r06"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="MoneyPrinter" type="Node3D"]
+script = ExtResource("1_lqhv7")
+money = ExtResource("2_xcjfw")
+interval = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, 5)
+mesh = SubResource("BoxMesh_o033m")
+skeleton = NodePath("../..")
+
+[node name="PrinterLabel" type="Label3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.760972, 0)
+text = "money printer"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_h0r06")

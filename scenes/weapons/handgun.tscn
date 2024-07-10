@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://gjvnv8fmg8if"]
+
+[ext_resource type="PackedScene" uid="uid://dl5l5tmfdjn0w" path="res://assets/models/handgun.glb" id="1_kfuae"]
+
+[node name="handgun" instance=ExtResource("1_kfuae")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-0.05, 0, -1.94707e-08, 0, 0.05, 0, 1.94707e-08, 0, -0.05, 0.668319, -0.258221, -0.700493)
+layers = 2
+
+[node name="SubViewport" type="SubViewport" parent="." index="1"]
+canvas_cull_mask = 4294967294
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport" index="0"]
+cull_mask = 1048574
+current = true

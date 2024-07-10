@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cb7lme8v0qtwp"]
+
+[ext_resource type="Texture2D" uid="uid://luon88f4uvsi" path="res://assets/textures/grid.png" id="1_hob60"]
+
+[resource]
+albedo_color = Color(0.262932, 0.262932, 0.262932, 1)
+albedo_texture = ExtResource("1_hob60")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0

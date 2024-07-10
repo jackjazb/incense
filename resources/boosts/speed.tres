@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="BoostResource" load_steps=2 format=3 uid="uid://lpvkxa1q35nf"]
+
+[ext_resource type="Script" path="res://src/resources/boost_resource.gd" id="1_3mevy"]
+
+[resource]
+script = ExtResource("1_3mevy")
