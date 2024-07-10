@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://buuvhbfgpu737"]
 
 [ext_resource type="PackedScene" uid="uid://c0d5lo72e280a" path="res://scenes/weapons/axe.tscn" id="1_m4vmo"]
-[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="2_hsalq"]
+[ext_resource type="Script" path="res://scripts/resources/item_resource.gd" id="2_hsalq"]
 
 [resource]
 script = ExtResource("2_hsalq")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://nhqapx0ism4l"]
 
-[ext_resource type="Script" path="res://src/level/money_printer.gd" id="1_lqhv7"]
+[ext_resource type="Script" path="res://scripts/level/money_printer.gd" id="1_lqhv7"]
 [ext_resource type="PackedScene" uid="uid://hraddva7x0r1" path="res://scenes/level/money.tscn" id="2_xcjfw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o033m"]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://1e543jbh2qea"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://1e543jbh2qea"]
 
 [ext_resource type="FontFile" uid="uid://d0c6j7ecrh17w" path="res://theme/fonts/mx437-dosv.ttf" id="1_eu7yp"]
 
@@ -60,6 +60,9 @@ border_color = Color(0.194349, 0.194349, 0.194349, 1)
 expand_margin_top = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rtke"]
+bg_color = Color(0, 0, 0.333333, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_47n1g"]
 bg_color = Color(0, 0, 0.333333, 1)
 
@@ -91,7 +94,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_dydv2")
 Button/styles/normal = SubResource("StyleBoxFlat_12km4")
 Button/styles/pressed = SubResource("StyleBoxFlat_34bb4")
 Label/fonts/font = ExtResource("1_eu7yp")
-Panel/styles/panel = null
+Panel/styles/panel = SubResource("StyleBoxFlat_4rtke")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_47n1g")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_5g310")
 TabBar/styles/tab_focus = SubResource("StyleBoxEmpty_4agon")

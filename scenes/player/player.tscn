@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn1au0hqqgj1g"]
+[gd_scene load_steps=11 format=3 uid="uid://bn1au0hqqgj1g"]
 
-[ext_resource type="Script" path="res://src/player/player.gd" id="1_4jd76"]
-[ext_resource type="Script" path="res://src/player/hand.gd" id="2_3mue2"]
-[ext_resource type="Script" path="res://src/player/hud.gd" id="3_vajfk"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_4jd76"]
+[ext_resource type="Script" path="res://scripts/player/hand.gd" id="2_3mue2"]
+[ext_resource type="Script" path="res://scripts/player/hud.gd" id="3_vajfk"]
+[ext_resource type="LabelSettings" uid="uid://yrytw2et6rj4" path="res://theme/header_label.tres" id="4_p6i01"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8ucaj"]
 
@@ -32,17 +33,18 @@ _data = {
 "swing": SubResource("Animation_exj4l")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("pause_menu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 script = ExtResource("1_4jd76")
+pause_menu = NodePath("HUD/PauseMenu")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 
 [node name="Hand" type="Node3D" parent="Camera3D" node_paths=PackedStringArray("use_indicator")]
 script = ExtResource("2_3mue2")
-use_indicator = NodePath("../../HUD/CenterContainer/Crosshair/UseIndicator")
+use_indicator = NodePath("../../HUD/Crosshair/UseIndicator")
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D/Hand"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -69,11 +71,11 @@ speed_scale = 2.423
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("player", "health", "money", "team")]
 script = ExtResource("3_vajfk")
 player = NodePath("..")
-health = NodePath("MarginContainer/Health")
-money = NodePath("MarginContainer2/HBoxContainer/Money")
-team = NodePath("MarginContainer2/HBoxContainer/Team")
+health = NodePath("HealthBar/Health")
+money = NodePath("GameInfo/HBoxContainer/Money")
+team = NodePath("GameInfo/HBoxContainer/Team")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="HealthBar" type="MarginContainer" parent="HUD"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 304.0
@@ -85,67 +87,100 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="Health" type="ProgressBar" parent="HUD/MarginContainer"]
+[node name="Health" type="ProgressBar" parent="HUD/HealthBar"]
 layout_mode = 2
 size_flags_vertical = 1
 max_value = 1.0
 value = 1.0
 
-[node name="MarginContainer2" type="MarginContainer" parent="HUD"]
+[node name="GameInfo" type="MarginContainer" parent="HUD"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -50.0
 offset_right = 96.0
 grow_vertical = 0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="GridContainer" parent="HUD/MarginContainer2"]
+[node name="HBoxContainer" type="GridContainer" parent="HUD/GameInfo"]
 layout_mode = 2
 columns = 3
 
-[node name="Label" type="Label" parent="HUD/MarginContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="HUD/GameInfo/HBoxContainer"]
 layout_mode = 2
 text = "Money"
 
-[node name="VSeparator" type="VSeparator" parent="HUD/MarginContainer2/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="HUD/GameInfo/HBoxContainer"]
 layout_mode = 2
 
-[node name="Money" type="Label" parent="HUD/MarginContainer2/HBoxContainer"]
+[node name="Money" type="Label" parent="HUD/GameInfo/HBoxContainer"]
 layout_mode = 2
 text = "0"
 
-[node name="Label3" type="Label" parent="HUD/MarginContainer2/HBoxContainer"]
+[node name="Label3" type="Label" parent="HUD/GameInfo/HBoxContainer"]
 layout_mode = 2
 text = "Team"
 
-[node name="VSeparator2" type="VSeparator" parent="HUD/MarginContainer2/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="HUD/GameInfo/HBoxContainer"]
 layout_mode = 2
 
-[node name="Team" type="Label" parent="HUD/MarginContainer2/HBoxContainer"]
+[node name="Team" type="Label" parent="HUD/GameInfo/HBoxContainer"]
 layout_mode = 2
 text = "RED"
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="PauseMenu" type="VBoxContainer" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -139.0
+offset_right = 103.0
+offset_bottom = 139.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/separation = 8
 
-[node name="Crosshair" type="Label" parent="HUD/CenterContainer"]
+[node name="Label" type="Label" parent="HUD/PauseMenu"]
 layout_mode = 2
+text = "Paused"
+label_settings = ExtResource("4_p6i01")
+
+[node name="Resume" type="Button" parent="HUD/PauseMenu"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Quit" type="Button" parent="HUD/PauseMenu"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -14.0
+offset_right = 10.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "＋"
 
-[node name="UseIndicator" type="Label" parent="HUD/CenterContainer/Crosshair"]
+[node name="UseIndicator" type="Label" parent="HUD/Crosshair"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 44.0
 offset_bottom = 39.0
 text = "use"
+
+[connection signal="pressed" from="HUD/PauseMenu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/Quit" to="." method="_on_quit_pressed"]

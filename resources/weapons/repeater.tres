@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://c4hdm2j5enwwa"]
 
-[ext_resource type="PackedScene" uid="uid://c0d5lo72e280a" path="res://scenes/weapons/axe.tscn" id="1_6mul7"]
-[ext_resource type="Script" path="res://src/resources/item_resource.gd" id="1_hdf48"]
+[ext_resource type="PackedScene" uid="uid://cn4fts2g044ux" path="res://scenes/weapons/repeater.tscn" id="1_251bk"]
+[ext_resource type="Script" path="res://scripts/resources/item_resource.gd" id="1_hdf48"]
 
 [resource]
 script = ExtResource("1_hdf48")
-instance = ExtResource("1_6mul7")
+instance = ExtResource("1_251bk")
 key = 3
 name = "Repeater"
 cost = 5

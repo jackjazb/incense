@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c3d5u2xo6vln7"]
+[gd_scene load_steps=14 format=3 uid="uid://c3d5u2xo6vln7"]
 
-[ext_resource type="Script" path="res://src/level/world.gd" id="1_3ifnb"]
+[ext_resource type="Script" path="res://scripts/level/world.gd" id="1_3ifnb"]
 [ext_resource type="PackedScene" uid="uid://bn1au0hqqgj1g" path="res://scenes/player/player.tscn" id="2_rr6hi"]
 [ext_resource type="Theme" uid="uid://1e543jbh2qea" path="res://theme/theme.tres" id="2_wlsx0"]
+[ext_resource type="AudioStream" uid="uid://dmessencv17pb" path="res://assets/audio/drone.wav" id="3_7jnb3"]
 [ext_resource type="FontFile" uid="uid://b1iqprlo77aq4" path="res://theme/fonts/mars.otf" id="3_54o2l"]
 [ext_resource type="PackedScene" uid="uid://dwj4kjexchejh" path="res://scenes/level/base.tscn" id="4_nos8i"]
 [ext_resource type="PackedScene" uid="uid://bdpnt0tsdlr1j" path="res://scenes/level/centre.tscn" id="5_qstdv"]
@@ -36,6 +37,10 @@ join_button = NodePath("UI/Panel2/MarginContainer/VBoxContainer/Join")
 host_button = NodePath("UI/Panel2/MarginContainer/VBoxContainer/Host")
 menu = NodePath("UI/Panel2")
 player = ExtResource("2_rr6hi")
+
+[node name="DronePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7jnb3")
+autoplay = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 

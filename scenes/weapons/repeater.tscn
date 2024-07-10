@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn4fts2g044ux"]
+
+[ext_resource type="Script" path="res://scripts/weapons/repeater.gd" id="1_ip5oc"]
+[ext_resource type="AudioStream" uid="uid://bffdf4gn4nvc3" path="res://assets/audio/shot 2.wav" id="2_4vsg5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lnsso"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[node name="Repeater" type="Node3D"]
+script = ExtResource("1_ip5oc")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_4vsg5")
+max_polyphony = 32
+bus = &"Short"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.477, -0.255, -0.621)
+mesh = SubResource("CylinderMesh_lnsso")
+
+[node name="Camera3D" type="Camera3D" parent="."]

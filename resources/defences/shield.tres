@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BoostResource" load_steps=2 format=3 uid="uid://wlmsx6nio4bi"]
 
-[ext_resource type="Script" path="res://src/resources/defence_resource.gd" id="1_g8jdd"]
+[ext_resource type="Script" path="res://scripts/resources/defence_resource.gd" id="1_g8jdd"]
 
 [resource]
 script = ExtResource("1_g8jdd")

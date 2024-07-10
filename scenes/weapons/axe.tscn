@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c0d5lo72e280a"]
 
 [ext_resource type="PackedScene" uid="uid://ccgbbfrcghbxf" path="res://assets/models/axe.glb" id="1_b4asn"]
-[ext_resource type="Script" path="res://src/weapons/axe.gd" id="2_nf5fa"]
+[ext_resource type="Script" path="res://scripts/weapons/axe.gd" id="2_nf5fa"]
 [ext_resource type="Texture2D" uid="uid://ic7j2nx65xlw" path="res://assets/models/axe_axe.png" id="2_o6eh7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lt5k"]
